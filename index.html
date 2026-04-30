@@ -1,0 +1,908 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Михаела & Камен — 20 Септември 2026</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@200;300;400&display=swap" rel="stylesheet">
+        <style>
+    /* ─── RESET & BASE ─── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --cream:   #f8f6f4;
+      --parchment: #f8f6f4;
+      --blush:   #f3dde2;
+      --rose:    #d8b7c3;
+      --deep:    #8fa6c7;
+      --gold:    #afc0dc;
+      --muted:   #c9d7eb;
+      --darkest: #5f7db0;
+      --font-display: 'Cormorant Garamond', Georgia, serif;
+      --font-body:    'Jost', sans-serif;
+    }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body {
+      background: var(--cream);
+      color: var(--deep);
+      font-family: var(--font-body);
+      font-weight: 400;
+      overflow-x: hidden;
+    }
+
+    /* ─── NAV ─── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; justify-content: center; gap: 2.5rem;
+      padding: 1.2rem 2rem;
+      background: rgba(249,245,239,0.88);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(201,169,110,0.2);
+      font-family: var(--font-body);
+      font-size: 1rem;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+    }
+    nav a {
+      color: var(--deep); text-decoration: none;
+      transition: color 0.3s;
+    }
+    nav a:hover { color: var(--gold); }
+    section { min-height: 100vh; }
+    .section-inner {
+      max-width: 900px; margin: 0 auto;
+      padding: 8rem 2rem 5rem;
+    }
+    .section-label {
+      font-family: var(--font-body);
+      font-size: 0.65rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1rem;
+    }
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(2.4rem, 6vw, 4rem);
+      font-weight: 300;
+      line-height: 1.15;
+      color: var(--darkest);
+      margin-bottom: 2.5rem;
+    }
+    .section-title em { font-style: italic; color: var(--rose); }
+    .divider {
+      width: 60px; height: 1px;
+      background: var(--gold); margin: 2rem 0;
+    }
+
+    /* ─── 1. WELCOME / HERO ─── */
+    #welcome {
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      text-align: center;
+      background: var(--cream);
+      position: relative;
+      overflow: hidden;
+      padding-top: 4rem;
+    }
+    .hero-bg-circle {
+      position: absolute;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(212,165,160,0.18), transparent 70%);
+      pointer-events: none;
+    }
+    .hero-bg-circle.c1 { width: 700px; height: 700px; top: -200px; left: -200px; }
+    .hero-bg-circle.c2 { width: 500px; height: 500px; bottom: -100px; right: -100px; }
+
+    .hero-date-badge {
+      font-family: var(--font-body);
+      font-size: 0.9  rem;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--gold);
+      border: 1px solid var(--gold);
+      padding: 0.5rem 1.5rem;
+      margin-bottom: 2.5rem;
+      animation: fadeUp 1s ease both;
+    }
+    .hero-names {
+      font-family: var(--font-display);
+      font-size: clamp(3.5rem, 12vw, 8rem);
+      font-weight: 400;
+      line-height: 1;
+      color: var(--darkest);
+      animation: fadeUp 1s 0.2s ease both;
+    }
+    .hero-names span { color: var(--rose); font-style: italic; }
+    .hero-ampersand {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 6vw, 4rem);
+      font-style: italic;
+      color: var(--gold);
+      display: block;
+      margin: 0.2rem 0;
+      animation: fadeUp 1s 0.35s ease both;
+    }
+    .hero-location {
+      font-family: var(--font-body);
+      font-size: 0.9rem;
+      font-weight: 350;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-top: 1.5rem;
+      animation: fadeUp 1s 0.5s ease both;
+    }
+
+    /* Countdown */
+    .countdown {
+      display: flex; gap: 2.5rem;
+      margin-top: 3.5rem;
+      animation: fadeUp 1s 0.65s ease both;
+    }
+    .countdown-unit { text-align: center; }
+    .countdown-num {
+      font-family: var(--font-display);
+      font-size: clamp(3rem, 5vw, 4rem);
+      font-weight: 300;
+      color: var(--darkest);
+      line-height: 1;
+    }
+    .countdown-label {
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--deep);
+      margin-top: 0.3rem;
+    }
+    .countdown-sep {
+      font-family: var(--font-display);
+      font-size: 2rem;
+      color: var(--gold);
+      line-height: 1;
+      align-self: flex-start;
+      margin-top: 0.2rem;
+    }
+    .scroll-hint {
+      position: absolute; bottom: 2.5rem;
+      font-size: 0.6rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--muted);
+      animation: pulse 2.5s infinite;
+    }
+    .scroll-hint::after {
+      content: ''; display: block;
+      width: 1px; height: 40px;
+      background: var(--gold);
+      margin: 0.5rem auto 0;
+    }
+
+    /* ─── 2. OUR STORY ─── */
+    #story { background: var(--parchment); min-height: auto; }
+
+    .story-section {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: start;
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 7rem 2rem 5rem;
+    }
+
+    /* ── Left: text ── */
+    .story-text {}
+
+    .story-title {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      font-weight: 400;
+      font-style: italic;
+      color: var(--rose);
+      margin-bottom: 2rem;
+      line-height: 1.15;
+    }
+
+    .wavy-paragraph {
+      margin-bottom: 1.8rem;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .wavy-paragraph.visible { opacity: 1; transform: translateY(0); }
+
+    .wavy-paragraph .timeline-heading {
+      font-family: var(--font-display);
+      font-size: 2rem;
+      font-weight: 400;
+      color: var(--darkest);
+      margin-bottom: 0.35rem;
+    }
+    .wavy-paragraph .timeline-text {
+      font-size: 1rem;
+      line-height: 1.9;
+      color: var(--deep);
+    }
+
+    /* Stacked polaroids below the text */
+    .stacked-photos {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-top: 2.5rem;
+    }
+
+    /* ── Polaroid shared ── */
+    .polaroid {
+      background: #fff;
+      padding: 8px 8px 26px;
+      box-shadow: 0 4px 18px rgba(58,46,43,0.13);
+      transform: rotate(var(--rotate, 0deg));
+      transition: transform 0.3s ease, box-shadow 0.3s ease, z-index 0s;
+      cursor: default;
+      position: relative;
+      flex-shrink: 0;
+    }
+    .polaroid:hover {
+      transform: rotate(0deg) scale(1.05) !important;
+      box-shadow: 0 12px 36px rgba(58,46,43,0.22);
+      z-index: 20;
+    }
+    .polaroid img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .polaroid span {
+      display: block;
+      text-align: center;
+      font-family: var(--font-display);
+      font-size: 1.3rem;
+      font-style: italic;
+      color: var(--muted);
+      margin-top: 5px;
+      line-height: 1.2;
+    }
+
+    /* Placeholder when no real img yet */
+    .polaroid .ph {
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, #e8d5d2 0%, var(--parchment) 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+      font-size: 1.4rem;
+    }
+    .polaroid .ph small {
+      font-family: var(--font-body);
+      font-size: 0.55rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--rose);
+      opacity: 0.7;
+    }
+
+    /* ── Desktop: stacked photos sit directly below the text ── */
+    /* Hidden on mobile — they move into the carousel instead   */
+    .stacked-photos {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 1.2rem;
+      margin-top: 1.5rem;
+    }
+    .stacked-photos .polaroid {
+      width: 100%;
+      aspect-ratio: 3/4;
+      opacity: 0;
+      transform: rotate(var(--rotate,0deg)) translateY(20px);
+      transition: opacity 0.55s ease, transform 0.55s ease, box-shadow 0.3s ease;
+    }
+    .stacked-photos .polaroid.visible {
+      opacity: 1;
+      transform: rotate(var(--rotate,0deg)) translateY(0);
+    }
+    .stacked-photos .polaroid:hover {
+      opacity: 1;
+      transform: rotate(0deg) scale(1.05) translateY(0) !important;
+    }
+
+    /* ── Right: main photo grid (6 photos, 3 cols on desktop) ── */
+    .photo-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 1.2rem;
+      padding-top: 1rem;
+      align-content: start;
+    }
+    .photo-grid .polaroid {
+      width: 100%;
+      aspect-ratio: 3/4;
+      opacity: 0;
+      transform: rotate(var(--rotate,0deg)) translateY(20px);
+      transition: opacity 0.55s ease, transform 0.55s ease, box-shadow 0.3s ease;
+    }
+    .photo-grid .polaroid.visible {
+      opacity: 1;
+      transform: rotate(var(--rotate,0deg)) translateY(0);
+    }
+    .photo-grid .polaroid:hover {
+      opacity: 1;
+      transform: rotate(0deg) scale(1.05) translateY(0) !important;
+    }
+
+    /* Dot indicators — hidden on desktop */
+    .slideshow-dots { display: none; }
+
+    /* ── Mobile: unified swipe carousel ── */
+    @media (max-width: 2040px) { /*768*/
+      .story-section {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        padding: 6rem 1.2rem 3rem;
+      }
+
+      /* Hide the desktop stacked grid — those 3 photos join the carousel via JS */
+      .stacked-photos { display: none; }
+
+      /* Carousel */
+      .photo-grid {
+        order: -1;
+        display: flex;
+        flex-direction: row;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        gap: 1rem;
+        padding: 1rem 0.5rem 1.5rem;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+      }
+      .photo-grid::-webkit-scrollbar { display: none; }
+
+      .photo-grid .polaroid {
+        flex: 0 0 72vw;
+        max-width: 280px;
+        aspect-ratio: 3/4;
+        scroll-snap-align: center;
+        opacity: 1 !important;
+        transform: rotate(var(--rotate, 0deg)) !important;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+      .photo-grid .polaroid:active {
+        transform: rotate(0deg) scale(1.03) !important;
+      }
+    }
+
+    @media (max-width: 420px) {
+      .photo-grid .polaroid { flex: 0 0 80vw; }
+    }
+
+    /* ─── ANIMATIONS ─── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 0.5; }
+      50% { opacity: 1; }
+    }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 600px) {
+      .form-row { grid-template-columns: 1fr; }
+      .countdown { gap: 1.2rem; }
+      nav { gap: 1.2rem; font-size: 0.6rem; }
+      .countdown-sep { display: none; }
+    }
+
+
+    /* ─── 3. WEDDING DAY PROGRAM ─── */
+    #program { background: var(--cream); }
+    .program-grid {
+      display: grid;
+      grid-template-columns: 80px 1fr;
+      gap: 0;
+      margin-top: 1rem;
+    }
+    .program-row {
+      display: contents;
+      opacity: 0; transform: translateY(15px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+    .program-row.visible > * { opacity: 1; transform: translateY(0); }
+    .program-time {
+      font-family: var(--font-display);
+      font-size: 2rem;
+      font-style: italic;
+      font-weight: 500;
+      color: var(--deep);
+      padding: 1.2rem 1.5rem 1.2rem 0;
+      border-right: 1px solid rgba(201,169,110,0.3);
+      text-align: right;
+      white-space: nowrap;
+    }
+    .program-event {
+      padding: 1.2rem 0 1.2rem 1.5rem;
+      border-bottom: 1px solid rgba(201,169,110,0.15);
+    }
+    .program-event-title {
+      font-family: var(--font-display);
+      font-size: 2rem;
+      font-weight: 600;
+      color: var(--darkest);
+      margin-bottom: 0.2rem;
+    }
+    .program-event-desc {
+      font-size: 1rem;
+      color: var(--deep);
+      line-height: 1.6;
+    }
+    .program-icon {
+      font-size: 1.5rem; margin-right: 0.4rem;
+    }
+
+    /* ─── 4. Q&A ─── */
+    #faq { background: var(--parchment); }
+    .faq-list { margin-top: 1rem; }
+    .faq-item {
+      border-bottom: 1px solid rgba(201,169,110,0.3);
+      overflow: hidden;
+    }
+    .faq-question {
+      width: 100%; background: none; border: none; cursor: pointer;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1.3rem 0;
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      font-weight: 400;
+      color: var(--darkest);
+      text-align: left;
+      gap: 1rem;
+    }
+    .faq-question:hover { color: var(--rose); }
+    .faq-icon {
+      font-family: var(--font-display);
+      font-size: 1.4rem;
+      color: var(--gold);
+      line-height: 1;
+      flex-shrink: 0;
+      transition: transform 0.35s ease;
+    }
+    .faq-item.open .faq-icon { transform: rotate(45deg); }
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease, padding 0.3s ease;
+      font-size: 1rem;
+      line-height: 1.9;
+      color: var(--deep);
+    }
+    .faq-item.open .faq-answer { max-height: 300px; padding-bottom: 1.2rem; }
+
+    /* ─── GOOGLE FORM ─── */
+    #google-form {
+      display: flex; justify-content: center; padding: 4rem 2rem;
+    }
+
+    /* ─── FOOTER ─── */
+    footer {
+      background: var(--deep);
+      border-top: 1px solid rgba(201,169,110,0.15);
+      text-align: center;
+      padding: 2.5rem;
+      font-size: 0.68rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(11, 19, 68, 0.582);
+    }
+    footer span { color: var(--muted); }
+
+    /* ─── ANIMATIONS ─── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 0.5; }
+      50% { opacity: 1; }
+    }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 600px) {
+      .form-row { grid-template-columns: 1fr; }
+      .countdown { gap: 1.2rem; }
+      nav { gap: 1.2rem; font-size: 0.6rem; }
+      .countdown-sep { display: none; }
+    }
+        </style>
+    </head>
+    <body>
+        <!-- NAV -->
+        <nav>
+            <a href="#welcome">Начало</a>
+            <a href="#story">Нашата история</a>
+            <a href="#program">Програма</a>
+            <a href="#faq">Q&A</a>
+            <a href="#rsvp">RSVP</a>
+        </nav>
+        <!-- ═══════════════════════════════════ -->
+        <!-- 1. WELCOME                          -->
+        <!-- ═══════════════════════════════════ -->
+        <section id="welcome">
+            <div class="hero-bg-circle c1"></div>
+            <div class="hero-bg-circle c2"></div>
+            <div class="hero-date-badge">20 Септември 2026 &nbsp;·&nbsp; Hills Brewery Park, гр. Перущица</div>
+            <div class="hero-names">
+                Михаела
+                <span class="hero-ampersand">&</span>
+                Камен
+            </div>
+            <div class="divider"></div>
+            <p style="font-size: 1rem; color: var(--gold); margin-top: 1.5rem;">
+                С голяма радост ви каним да споделите с нас един от най-красивите дни в живота ни – денят, в който ще се вречем във вечна любов и ще създадем нашето семейство.
+                <div class="divider"></div>
+                <p class="hero-location">Остават</p>
+                <div class="countdown" id="countdown">
+                    <div class="countdown-unit">
+                        <div class="countdown-num" id="cd-days">--</div>
+                        <div class="countdown-label">Дни</div>
+                    </div>
+                    <div class="countdown-sep">·</div>
+                    <div class="countdown-unit">
+                        <div class="countdown-num" id="cd-hours">--</div>
+                        <div class="countdown-label">Часове</div>
+                    </div>
+                    <div class="countdown-sep">·</div>
+                    <div class="countdown-unit">
+                        <div class="countdown-num" id="cd-mins">--</div>
+                        <div class="countdown-label">Минути</div>
+                    </div>
+                    <div class="countdown-sep">·</div>
+                    <div class="countdown-unit">
+                        <div class="countdown-num" id="cd-secs">--</div>
+                        <div class="countdown-label">Секунди</div>
+                    </div>
+                </div>
+                <!-- <div class="scroll-hint">Scroll</div> -->
+            </section>
+            <!-- ═══════════════════════════════════ -->
+            <!-- 2. OUR STORY                        -->
+            <!-- ═══════════════════════════════════ -->
+            <section id="story">
+                <div class="story-section">
+                    <!-- LEFT: Text + stacked photos -->
+                    <div class="story-text">
+                        <h2 class="story-title">Нашата история</h2>
+                        <div class="wavy-paragraph">
+                            <div class="timeline-heading">
+                                <b>Първа среща</b>
+                            </div>
+                            <p class="timeline-text">
+                                В деня на сватбата ще станат точно 7 години от тази първа среща. Тогава бяхме на тепето да гледаме звезди на фона на метъл концерт (не знаехме, че ще има, не сме такива). Сега, на тази дата, заедно с вас ще започне нашето завинаги!
+                            </p>
+                        </div>
+                        <div class="wavy-paragraph">
+                            <div class="timeline-heading">
+                                <b>Пътешествия</b>
+                            </div>
+                            <p class="timeline-text">
+                                През годините пътувахме много, бяхме на концерти, учехме се на нови неща заедно, че даже и висшите успяхме да си вземем.
+                            </p>
+                        </div>
+                        <div class="wavy-paragraph">
+                            <div class="timeline-heading">
+                                <b>Нашият дом</b>
+                            </div>
+                            <p class="timeline-text">
+                                След 5 години приключения, решихме, че е време за по-сериозна стъпка и си купихме първото жилище заедно — защото нищо не казва „Обичам те" повече от общ кредит.
+                            </p>
+                        </div>
+                        <div class="wavy-paragraph">
+                            <div class="timeline-heading">
+                                <b>Предложението</b>
+                            </div>
+                            <p class="timeline-text">
+                                Предложението за брак дойде на 6-тата година на брега на язовир Голям Беглик в компанията на най-специалния член на нашето малко семейство — Бари!
+                            </p>
+                        </div>
+                        <!-- Stacked polaroids at bottom of left column -->
+                        <div class="stacked-photos">
+                            <div class="polaroid" style="--rotate:-6deg;">
+                                <img src="photos/apartment.png" alt="Пазаруване за апартамента" onerror="this.parentElement.innerHTML='<div class=\'ph\'>🏠<small>снимка</small></div><span>Пазаруване за апартамента</span>'">
+                                <span>Пазаруване за апартамента</span>
+                            </div>
+                            <div class="polaroid" style="--rotate:5deg;">
+                                <img src="photos/proposal.jpg" alt="Предложението" onerror="this.parentElement.innerHTML='<div class=\'ph\'>💍<small>снимка</small></div><span>Предложението</span>'">
+                                <span>Предложението</span>
+                            </div>
+                            <div class="polaroid" style="--rotate:-3deg;">
+                                <img src="photos/proposal2.jpg" alt="Бари и пръстен" onerror="this.parentElement.innerHTML='<div class=\'ph\'>🐾<small>снимка</small></div><span>Бари и пръстен</span>'">
+                                <span>Бари и пръстен</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- RIGHT: Photo grid -->
+                    <div class="photo-grid">
+                        <div class="polaroid" style="--rotate:-5deg;">
+                            <img src="photos/first-date.JPG" alt="Първа среща" onerror="this.parentElement.innerHTML='<div class=\'ph\'>✨<small>снимка</small></div><span>Първа среща</span>'">
+                            <span>Първа среща</span>
+                        </div>
+                        <div class="polaroid" style="--rotate:4deg;">
+                            <img src="photos/athens.png" alt="Атина" onerror="this.parentElement.innerHTML='<div class=\'ph\'>🏛️<small>снимка</small></div><span>Атина</span>'">
+                            <span>Атина</span>
+                        </div>
+                        <div class="polaroid" style="--rotate:3deg;">
+                            <img src="photos/kayaking.JPG" alt="Кану в Черно море" onerror="this.parentElement.innerHTML='<div class=\'ph\'>🛶<small>снимка</small></div><span>Кану в Черно море</span>'">
+                            <span>Кану в Черно море</span>
+                        </div>
+                        <div class="polaroid" style="--rotate:-4deg;">
+                            <img src="photos/vienna.JPG" alt="Виена" onerror="this.parentElement.innerHTML='<div class=\'ph\'>🎡<small>снимка</small></div><span>Виена</span>'">
+                            <span>Виена</span>
+                        </div>
+                        <div class="polaroid" style="--rotate:3deg;">
+                            <img src="photos/best-people.jpg" alt="Кумство" onerror="this.parentElement.innerHTML='<div class=\'ph\'>🥂<small>снимка</small></div><span>Кумство</span>'">
+                            <span>Кумство</span>
+                        </div>
+                        <div class="polaroid" style="--rotate:-4deg;">
+                            <img src="photos/lunch-date.JPG" alt="Обяд в Капана" onerror="this.parentElement.innerHTML='<div class=\'ph\'>☕<small>снимка</small></div><span>Обяд в Капана</span>'">
+                            <span>Обяд в Капана</span>
+                        </div>
+                    </div>
+                    <!-- Dot indicators (visible on mobile only) -->
+                    <div class="slideshow-dots" id="slideshow-dots"></div>
+                </div>
+            </section>
+            <!-- ═══════════════════════════════════ -->
+            <!-- 3. WEDDING DAY PROGRAM             -->
+            <!-- ═══════════════════════════════════ -->
+            <section id="program">
+                <div class="section-inner">
+                    <p class="section-label">Програма</p>
+                    <h2 class="section-title">
+                        Сватбена
+                        <em>Програма</em>
+                    </h2>
+                    <div class="divider"></div>
+                    <div class="program-grid">
+                        <div class="program-row">
+                            <div class="program-time">16:30</div>
+                            <div class="program-event">
+                                <div class="program-event-title">
+                                    <span class="program-icon">🌿</span>
+                                    Welcome drinks
+                                </div>
+                                <div class="program-event-desc">Посрещане на първите гости.</div>
+                            </div>
+                        </div>
+                        <div class="program-row">
+                            <div class="program-time">17:00</div>
+                            <div class="program-event">
+                                <div class="program-event-title">
+                                    <span class="program-icon">💍</span>
+                                    Церемония
+                                </div>
+                                <div class="program-event-desc">Гражданският брак е се състои в градината на ресторанта.</div>
+                            </div>
+                        </div>
+                        <div class="program-row">
+                            <div class="program-time">17:30</div>
+                            <div class="program-event">
+                                <div class="program-event-title">
+                                    <span class="program-icon">🥂</span>
+                                    Поздравления
+                                </div>
+                                <div class="program-event-desc">Приемане на поздравления от нашите гости.</div>
+                            </div>
+                        </div>
+                        <div class="program-row">
+                            <div class="program-time">18:30</div>
+                            <div class="program-event">
+                                <div class="program-event-title">
+                                    <span class="program-icon">🕯️</span>
+                                    Вечеря
+                                </div>
+                                <div class="program-event-desc">Веднага след това се местим в шатрата, където ще започне сервирането на вечерята.</div>
+                            </div>
+                        </div>
+                        <div class="program-row">
+                            <div class="program-time">22:30</div>
+                            <div class="program-event">
+                                <div class="program-event-title">
+                                    <span class="program-icon">🎂</span>
+                                    Тортааа
+                                </div>
+                                <div class="program-event-desc">Разрязване на сватбената торта.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- ═══════════════════════════════════ -->
+            <!-- 4. Q&A / FAQ                        -->
+            <!-- ═══════════════════════════════════ -->
+            <section id="faq">
+                <div class="section-inner">
+                    <p class="section-label">Полезна информация</p>
+                    <h2 class="section-title">
+                        Въпрооси
+                        <em>&</em>
+                        Отговори
+                    </h2>
+                    <div class="divider"></div>
+                    <div class="faq-list">
+                        <div class="faq-item">
+                            <button class="faq-question">
+                                Има ли дрескод?
+                                <span class="faq-icon">+</span>
+                            </button>
+                            <div class="faq-answer">
+                                Официален / black tie optional. Ще се радваме гостите ни да изберат елегантно и стилно облекло, подходящо за градинска вечерна сватба.
+                            </div>
+                        </div>
+                        <div class="faq-item">
+                            <button class="faq-question">
+                                Събитието подходящо ли е за деца и домашни любимци?
+                                <span class="faq-icon">+</span>
+                            </button>
+                            <div class="faq-answer">
+                                Децата са добре дошли, в градината има детска площадка, от която ще моожете да се възползвате Моля, отбележете присъствието им във формата за RSVP. Относно домашните любимци — обичаме животните,
+                            но ви молим да ги оставите вкъщи през този ден. Благодарим за разбирането!
+                            </div>
+                        </div>
+                        <div class="faq-item">
+                            <button class="faq-question">
+                                Ще има ли осигурен паркинг?
+                                <span class="faq-icon">+</span>
+                            </button>
+                            <div class="faq-answer">
+                                Да, на място има безплатен паркинг. Адресът на ресторанта е
+                                <a href="https://maps.app.goo.gl/gpJoh1Xa75gMArJ68" target="_blank">ул. Черни връх, гр. Перущиица</a>
+                            </div>
+                        </div>
+                        <div class="faq-item">
+                            <button class="faq-question">
+                                Мога ли да доведа придружител (plus one)?
+                                <span class="faq-icon">+</span>
+                            </button>
+                            <div class="faq-answer">
+                                Във формата за RSVP ще имате възможност да посочите дали ще доведете придружител.
+                            </div>
+                        </div>
+                        <div class="faq-item">
+                            <button class="faq-question">
+                                В колко часа трябва да пристигнем?
+                                <span class="faq-icon">+</span>
+                            </button>
+                            <div class="faq-answer">
+                                Церемонията започва в 17:00, но ви препоръчваме да пристигнете около 16:30, за да имате време да се настаните, да се насладите на обстановката и да не изпуснете нито миг от посрещането на първите гости.
+                            </div>
+                        </div>
+                        <div class="faq-item">
+                            <button class="faq-question">
+                                Нужно ли е да потвърдим присъствието си?
+                                <span class="faq-icon">+</span>
+                            </button>
+                            <div class="faq-answer">
+                                Да, молим ви да потвърдите присъствието си до
+                                <strong style="color:var(--gold)">1 Май 2026</strong>
+                                чрез формата в секцията RSVP по-долу. Това ще ни помогне много с организацията и планирането на събитието.
+                            </div>
+                        </div>
+                        <div class="faq-item">
+                            <button class="faq-question">
+                                Ще има ли специално меню за хранителни ограничения?
+                                <span class="faq-icon">+</span>
+                            </button>
+                            <div class="faq-answer">
+                                Разбира се. Ако имате алергии, хранителни непоносимости или предпочитате вегетарианско меню, моля да ни уведомите предварително.
+                            </div>
+                        </div>
+                        <div class="faq-item">
+                            <button class="faq-question">
+                                Какво време да очакваме?
+                                <span class="faq-icon">+</span>
+                            </button>
+                            <div class="faq-answer">
+                                Сватбата ще се проведе в шатрата на ресторанта. Въпреки това, се надяваме на хубаво време, за да можем да се насладим на градината.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- ═══════════════════════════════════ -->
+            <!-- 5. RSVP                             -->
+            <!-- ═══════════════════════════════════ -->
+            <section id="google-form">
+                <iframe
+                    src="https://docs.google.com/forms/d/e/1FAIpQLScnsHnyGtpETMrra2UwUGMQRgnacj-pALAlBEb7iWMv9C1pqw/viewform?embedded=true"
+                    width="640"
+                    height="1543"
+                    frameborder="0"
+                    marginheight="0"
+                    marginwidth="0"
+                >Loading…</iframe>
+            </section>
+            <!-- FOOTER -->
+            <footer>
+                Направено с любов от
+                <span>Михаела и Камен</span>
+                &nbsp;·&nbsp; 20 Септември 2026
+            </footer>
+            <script>
+    // ── Countdown ──
+    const weddingDate = new Date('2026-06-14T15:00:00');
+    function updateCountdown() {
+      const now = new Date();
+      const diff = weddingDate - now;
+      if (diff <= 0) {
+        document.getElementById('countdown').innerHTML = '<p style="font-family:var(--font-display);font-size:1.5rem;font-style:italic;color:var(--rose)">Today is the day! 🎉</p>';
+        return;
+      }
+      const d = Math.floor(diff / 864e5);
+      const h = Math.floor((diff % 864e5) / 36e5);
+      const m = Math.floor((diff % 36e5) / 6e4);
+      const s = Math.floor((diff % 6e4) / 1e3);
+      document.getElementById('cd-days').textContent  = String(d).padStart(2,'0');
+      document.getElementById('cd-hours').textContent = String(h).padStart(2,'0');
+      document.getElementById('cd-mins').textContent  = String(m).padStart(2,'0');
+      document.getElementById('cd-secs').textContent  = String(s).padStart(2,'0');
+    }
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+
+    // ── Scroll reveal ──
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.15 });
+    document.querySelectorAll('.wavy-paragraph, .photo-grid .polaroid, .program-row').forEach((el, i) => {
+      // stagger photo grid items
+      if (el.classList.contains('polaroid')) el.style.transitionDelay = (i % 6 * 0.08) + 's';
+      observer.observe(el);
+    });
+
+    // ── FAQ accordion ──
+    document.querySelectorAll('.faq-question').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const item = btn.parentElement;
+        const isOpen = item.classList.contains('open');
+        document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+        if (!isOpen) item.classList.add('open');
+      });
+    });
+
+   // ── Slideshow: inject stacked photos into carousel on mobile, dots ──
+    const grid = document.querySelector('.photo-grid');
+    const dotsContainer = document.getElementById('slideshow-dots');
+
+    function syncCarousel() {
+      // Remove previously injected clones
+      grid.querySelectorAll('.carousel-clone').forEach(el => el.remove());
+
+      if (window.innerWidth <= 2040) {
+        // Clone the 3 stacked photos into the swipe carousel
+        document.querySelectorAll('.stacked-photos .polaroid').forEach(card => {
+          const clone = card.cloneNode(true);
+          clone.classList.add('carousel-clone');
+          grid.appendChild(clone);
+        });
+      }
+    }
+
+    document.querySelectorAll('.stacked-photos .polaroid').forEach((el, i) => {
+      el.style.transitionDelay = (i * 0.1) + 's';
+      observer.observe(el);
+    });
+
+    syncCarousel();
+    window.addEventListener('resize', syncCarousel);
+    if (grid) grid.addEventListener('scroll', updateDots, { passive: true });
+            </script>
+        </body>
+    </html>
