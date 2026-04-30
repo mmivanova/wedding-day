@@ -260,10 +260,11 @@
     .polaroid span {
       display: block;
       text-align: center;
+      text-wrap: balance;
       font-family: var(--font-display);
       font-size: 1.3rem;
-      font-style: italic;
-      color: var(--muted);
+      font-style: bold;
+      color: var(--deep);
       margin-top: 5px;
       line-height: 1.2;
     }
@@ -341,7 +342,7 @@
     .slideshow-dots { display: none; }
 
     /* ── Mobile: unified swipe carousel ── */
-    @media (max-width: 2040px) { /*768*/
+    @media (max-width: 1024px) { /*768*/
       .story-section {
         grid-template-columns: 1fr;
         gap: 2rem;
@@ -530,7 +531,7 @@
             <a href="#story">Нашата история</a>
             <a href="#program">Програма</a>
             <a href="#faq">Q&A</a>
-            <a href="#rsvp">RSVP</a>
+            <a href="#google-form">RSVP</a>
         </nav>
         <!-- ═══════════════════════════════════ -->
         <!-- 1. WELCOME                          -->
@@ -837,7 +838,7 @@
             </footer>
             <script>
     // ── Countdown ──
-    const weddingDate = new Date('2026-06-14T15:00:00');
+    const weddingDate = new Date('2026-09-20T17:00:00');
     function updateCountdown() {
       const now = new Date();
       const diff = weddingDate - now;
@@ -879,13 +880,13 @@
 
    // ── Slideshow: inject stacked photos into carousel on mobile, dots ──
     const grid = document.querySelector('.photo-grid');
-    const dotsContainer = document.getElementById('slideshow-dots');
+    // const dotsContainer = document.getElementById('slideshow-dots');
 
     function syncCarousel() {
       // Remove previously injected clones
       grid.querySelectorAll('.carousel-clone').forEach(el => el.remove());
 
-      if (window.innerWidth <= 2040) {
+      if (window.innerWidth <= 1024) {
         // Clone the 3 stacked photos into the swipe carousel
         document.querySelectorAll('.stacked-photos .polaroid').forEach(card => {
           const clone = card.cloneNode(true);
