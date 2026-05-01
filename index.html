@@ -238,7 +238,7 @@
     /* ── Polaroid shared ── */
     .polaroid {
       background: #fff;
-      padding: 8px 8px 26px;
+      padding: 8px 8px 30px;
       box-shadow: 0 4px 18px rgba(58,46,43,0.13);
       transform: rotate(var(--rotate, 0deg));
       transition: transform 0.3s ease, box-shadow 0.3s ease, z-index 0s;
@@ -487,10 +487,111 @@
     }
     .faq-item.open .faq-answer { max-height: 300px; padding-bottom: 1.2rem; }
 
-    /* ─── GOOGLE FORM ─── */
+    /* ─── RSVP SECTION & MODAL ─── */
     #google-form {
-      display: flex; justify-content: center; padding: 4rem 2rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 50vh;
+      padding: 4rem 2rem;
+      background: var(--darkest);
     }
+
+    .rsvp-cta {
+      text-align: center;
+      max-width: 520px;
+    }
+    .rsvp-cta .section-label { color: rgba(255,255,255,0.5); }
+    .rsvp-cta .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(2.4rem, 6vw, 4rem);
+      font-weight: 300;
+      color: #fff;
+      margin-bottom: 0;
+    }
+    .rsvp-intro {
+      font-size: 1.15rem;
+      line-height: 1.9;
+      color: rgba(255,255,255,0.6);
+      margin-bottom: 2rem;
+    }
+    .rsvp-intro strong { color: var(--muted); }
+
+    .btn-open-rsvp {
+      background: transparent;
+      border: 1px solid var(--gold);
+      color: var(--gold);
+      font-family: var(--font-body);
+      font-size: 0.9rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      padding: 1rem 3rem;
+      cursor: pointer;
+      transition: background 0.3s, color 0.3s;
+    }
+    .btn-open-rsvp:hover { background: var(--gold); color: var(--darkest); }
+
+    /* Modal overlay */
+    .rsvp-modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 500;
+      background: rgba(0, 0, 0, 0.75);
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+      /* smooth open */
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    .rsvp-modal.open {
+      display: flex;
+      opacity: 1;
+    }
+
+    .rsvp-modal-box {
+      position: relative;
+      width: 100%;
+      max-width: 680px;
+      height: 90vh;
+      background: #fff;
+      border-radius: 2px;
+      overflow: hidden;
+      transform: translateY(30px);
+      transition: transform 0.35s ease;
+    }
+    .rsvp-modal.open .rsvp-modal-box {
+      transform: translateY(0);
+    }
+
+    .rsvp-modal-close {
+      position: absolute;
+      top: 0.6rem;
+      right: 0.8rem;
+      z-index: 10;
+      background: rgba(255,255,255,0.9);
+      border: none;
+      border-radius: 50%;
+      width: 2rem; height: 2rem;
+      font-size: 0.9rem;
+      cursor: pointer;
+      color: var(--deep);
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+      transition: background 0.2s;
+    }
+    .rsvp-modal-close:hover { background: #fff; }
+
+    .rsvp-modal-box iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      display: block;
+    }
+
+    /* Prevent body scroll when modal is open */
+    body.modal-open { overflow: hidden; }
 
     /* ─── FOOTER ─── */
     footer {
@@ -821,19 +922,38 @@
             <!-- 5. RSVP                             -->
             <!-- ═══════════════════════════════════ -->
             <section id="google-form">
-                <iframe
-                    src="https://docs.google.com/forms/d/e/1FAIpQLScnsHnyGtpETMrra2UwUGMQRgnacj-pALAlBEb7iWMv9C1pqw/viewform?embedded=true"
-                    width="640"
-                    height="1543"
-                    frameborder="0"
-                    marginheight="0"
-                    marginwidth="0"
-                >Loading…</iframe>
+                <div class="rsvp-cta">
+                    <p class="section-label">Потвърдете присъствието си</p>
+                    <h2 class="section-title">RSVP</h2>
+                    <div class="divider" style="margin: 1.5rem auto;"></div>
+                    <p class="rsvp-intro">
+                        Молим Ви да потвърдите присъствието си до
+                        <strong>15 Август 2026</strong>.
+                        Ще ни помогне много с организацията!
+                    </p>
+                    <button class="btn-open-rsvp" id="btn-open-rsvp">
+                        Попълни формата →
+                    </button>
+                </div>
             </section>
+
+            <!-- ── RSVP Modal ── -->
+            <div id="rsvp-modal" class="rsvp-modal">
+                <div class="rsvp-modal-box">
+                    <button class="rsvp-modal-close" id="btn-close-rsvp">✕</button>
+                    <iframe
+                        id="rsvp-iframe"
+                        src=""
+                        data-src="https://docs.google.com/forms/d/e/1FAIpQLScnsHnyGtpETMrra2UwUGMQRgnacj-pALAlBEb7iWMv9C1pqw/viewform?embedded=true"
+                        frameborder="0"
+                        marginheight="0"
+                        marginwidth="0"
+                    >Зареждане…</iframe>
+                </div>
+            </div>
             <!-- FOOTER -->
             <footer>
-                Направено с любов от
-                <span>Михаела и Камен</span>
+              Михаела и Камен
                 &nbsp;·&nbsp; 20 Септември 2026
             </footer>
             <script>
@@ -903,7 +1023,34 @@
 
     syncCarousel();
     window.addEventListener('resize', syncCarousel);
-    if (grid) grid.addEventListener('scroll', updateDots, { passive: true });
+    if (grid) grid.addEventListener('scroll', () => {}, { passive: true });
+
+    // ── RSVP Modal ──
+    (function() {
+      const modal  = document.getElementById('rsvp-modal');
+      const iframe = document.getElementById('rsvp-iframe');
+      const btnOpen  = document.getElementById('btn-open-rsvp');
+      const btnClose = document.getElementById('btn-close-rsvp');
+      let loaded = false;
+
+      function openRsvp() {
+        if (!loaded) { iframe.src = iframe.dataset.src; loaded = true; }
+        modal.style.display = 'flex';
+        requestAnimationFrame(() => modal.classList.add('open'));
+        document.body.classList.add('modal-open');
+      }
+
+      function closeRsvp() {
+        modal.classList.remove('open');
+        document.body.classList.remove('modal-open');
+        setTimeout(() => { modal.style.display = 'none'; }, 300);
+      }
+
+      btnOpen.addEventListener('click', openRsvp);
+      btnClose.addEventListener('click', closeRsvp);
+      modal.addEventListener('click', e => { if (e.target === modal) closeRsvp(); });
+      document.addEventListener('keydown', e => { if (e.key === 'Escape') closeRsvp(); });
+    })();
             </script>
         </body>
     </html>
