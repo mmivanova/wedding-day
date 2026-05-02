@@ -4,6 +4,8 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Михаела & Камен — 20 Септември 2026</title>
+        <link type="image/png" sizes="16x16" rel="icon" href="photos/icon.png">
+        <link rel="apple-touch-icon" type="image/png" sizes="72x72" href="photos/icon.png">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@200;300;400&display=swap" rel="stylesheet">
@@ -650,7 +652,7 @@
             <p style="font-size: 1rem; color: var(--gold); margin-top: 1.5rem;">
                 С голяма радост ви каним да споделите с нас един от най-красивите дни в живота ни – денят, в който ще се вречем във вечна любов и ще създадем нашето семейство.
                 <div class="divider"></div>
-                <p class="hero-location">Остават</p>
+                <p class="hero-location" id="remaining-label">Остават</p>
                 <div class="countdown" id="countdown">
                     <div class="countdown-unit">
                         <div class="countdown-num" id="cd-days">--</div>
@@ -790,7 +792,7 @@
                                     <span class="program-icon">💍</span>
                                     Церемония
                                 </div>
-                                <div class="program-event-desc">Гражданският брак е се състои в градината на ресторанта.</div>
+                                <div class="program-event-desc">Гражданският брак ще се състои в градината на ресторанта.</div>
                             </div>
                         </div>
                         <div class="program-row">
@@ -961,11 +963,22 @@
     const weddingDate = new Date('2026-09-20T17:00:00');
     function updateCountdown() {
       const now = new Date();
-      const diff = weddingDate - now;
-      if (diff <= 0) {
-        document.getElementById('countdown').innerHTML = '<p style="font-family:var(--font-display);font-size:1.5rem;font-style:italic;color:var(--rose)">Today is the day! 🎉</p>';
+      
+      const today  = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+      const tDay   = new Date(weddingDate.getFullYear(), weddingDate.getMonth(), weddingDate.getDate());
+      
+      var remainingLabel = document.getElementById('remaining-label');
+      if (today.getTime() === tDay.getTime()) {
+        remainingLabel.style.display = 'none';
+        document.getElementById('countdown').innerHTML = '<p style="font-family:var(--font-display);font-size:1.5rem;font-style:italic;color:var(--rose)">Днес е големият ден 🎉 Очакваме Ви с нетърпение!</p>';
+        return;
+      } else if (today > tDay) {
+        remainingLabel.style.display = 'none';
+        document.getElementById('countdown').innerHTML = '<p style="font-family:var(--font-display);font-size:1.5rem;font-style:italic;color:var(--rose)">Благодарим Ви, че бяхте част от нашия празник!</p>';
         return;
       }
+
+      const diff = weddingDate - now;
       const d = Math.floor(diff / 864e5);
       const h = Math.floor((diff % 864e5) / 36e5);
       const m = Math.floor((diff % 36e5) / 6e4);
